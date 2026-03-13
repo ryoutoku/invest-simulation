@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.4);
+  }
+}
+
+@layer components {
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      rgba(99, 102, 241, 1),
+      rgba(16, 185, 129, 1)
+    );
+  }
+
+  .card-compact {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  }
+
+  .card-title {
+    font-weight: 600;
+    color: rgba(15, 23, 42, 0.9);
+  }
+
+  .card-subtitle {
+    font-size: 0.85rem;
+    color: rgba(100, 116, 139, 0.9);
+  }
+
+  .chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 0.375rem;
+    background-color: rgba(15, 23, 42, 0.9);
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    padding: 0.25rem 0.5rem;
+  }
+}

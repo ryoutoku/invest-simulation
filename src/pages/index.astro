@@ -1,0 +1,39 @@
+---
+const title = '投資シミュレーション'
+import SimulationForm from '../components/SimulationForm.astro'
+import ResultsPanel from '../components/ResultsPanel.astro'
+import '../styles/index.css'
+import simUrl from '../scripts/sim.ts?url'
+---
+
+<html lang='ja'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='icon' href='/favicon.ico' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class='min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900'
+  >
+    <main class='mx-auto max-w-5xl px-4 py-12 sm:px-6'>
+      <header class='mb-10'>
+        <h1 class='text-3xl sm:text-4xl font-semibold tracking-tight mb-2'>
+          {title}
+        </h1>
+        <p class='text-sm text-slate-600 max-w-2xl'>
+          初期金額・毎月の積立金額・積立期間を入力し、モンテカルロ法で将来の運用結果をシミュレーションします。
+        </p>
+      </header>
+
+      <div class='grid gap-8 lg:grid-cols-2 lg:items-start'>
+        <SimulationForm />
+        <ResultsPanel />
+      </div>
+    </main>
+  </body>
+
+  <script type='module' src={simUrl}></script>
+</html>
