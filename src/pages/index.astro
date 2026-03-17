@@ -1,9 +1,11 @@
 ---
-const title = '投資シミュレーション'
 import SimulationForm from '../components/SimulationForm.astro'
 import ResultsPanel from '../components/ResultsPanel.astro'
+import '../styles/global.css'
 import '../styles/index.css'
 import simUrl from '../scripts/sim.ts?url'
+
+const title = '投資シミュレーション'
 ---
 
 <html lang='ja'>
@@ -16,9 +18,9 @@ import simUrl from '../scripts/sim.ts?url'
     <title>{title}</title>
   </head>
   <body
-    class='min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900'
+    class='min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-50 text-slate-900'
   >
-    <main class='mx-auto max-w-5xl px-4 py-12 sm:px-6'>
+    <main class='mx-auto max-w-[min(80vw,64rem)] px-4 py-12 sm:px-6'>
       <header class='mb-10'>
         <h1 class='text-3xl sm:text-4xl font-semibold tracking-tight mb-2'>
           {title}
@@ -28,7 +30,7 @@ import simUrl from '../scripts/sim.ts?url'
         </p>
       </header>
 
-      <div class='grid gap-8 lg:grid-cols-2 lg:items-start'>
+      <div class='grid gap-8'>
         <SimulationForm />
         <ResultsPanel />
       </div>
