@@ -1,9 +1,7 @@
 ---
-import SimulationForm from '../components/SimulationForm.astro'
-import ResultsPanel from '../components/ResultsPanel.astro'
+import SimulationApp from '../components/SimulationApp.tsx'
 import '../styles/global.css'
 import '../styles/index.css'
-import simUrl from '../scripts/sim.ts?url'
 
 const title = '投資シミュレーション'
 ---
@@ -31,11 +29,8 @@ const title = '投資シミュレーション'
       </header>
 
       <div class='grid gap-8'>
-        <SimulationForm />
-        <ResultsPanel />
+        <SimulationApp client:load />
       </div>
     </main>
   </body>
-
-  <script type='module' src={simUrl}></script>
 </html>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 const formEl = document.getElementById("sim-form") as HTMLFormElement | null;
 const summaryElMaybe = document.getElementById(
@@ -170,11 +170,11 @@ if (
   }
 
   function clearChart() {
-    d3.select(chartEl).selectAll('*').remove();
+    d3.select(chartEl).selectAll("*").remove();
   }
 
   function clearHistogram() {
-    d3.select(histEl).selectAll('*').remove();
+    d3.select(histEl).selectAll("*").remove();
   }
 
   const chartState: {
@@ -222,12 +222,13 @@ if (
     const svg = d3.select(chartEl);
 
     // Background
-    svg.append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', WIDTH)
-      .attr('height', HEIGHT)
-      .attr('fill', '#ffffff');
+    svg
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", WIDTH)
+      .attr("height", HEIGHT)
+      .attr("fill", "#ffffff");
 
     const {
       median,
@@ -268,7 +269,7 @@ if (
       PADDING_TOP + innerHeight * (1 - (v - minVal) / (maxVal - minVal || 1));
 
     // Grid
-    const gridGroup = svg.append('g');
+    const gridGroup = svg.append("g");
 
     const yTicks = 4;
     for (let i = 0; i <= yTicks; i++) {
@@ -276,21 +277,23 @@ if (
       const value = minVal + (maxVal - minVal) * (1 - t);
       const y = PADDING_TOP + innerHeight * t;
 
-      gridGroup.append('line')
-        .attr('x1', PADDING_LEFT)
-        .attr('x2', WIDTH - PADDING_RIGHT)
-        .attr('y1', y)
-        .attr('y2', y)
-        .attr('stroke', 'rgba(209,213,219,0.9)')
-        .attr('stroke-width', 1)
-        .attr('stroke-dasharray', '2 3');
+      gridGroup
+        .append("line")
+        .attr("x1", PADDING_LEFT)
+        .attr("x2", WIDTH - PADDING_RIGHT)
+        .attr("y1", y)
+        .attr("y2", y)
+        .attr("stroke", "rgba(209,213,219,0.9)")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "2 3");
 
-      gridGroup.append('text')
-        .attr('x', PADDING_LEFT - 8)
-        .attr('y', y + 4)
-        .attr('text-anchor', 'end')
-        .attr('fill', '#6b7280')
-        .attr('font-size', 10)
+      gridGroup
+        .append("text")
+        .attr("x", PADDING_LEFT - 8)
+        .attr("y", y + 4)
+        .attr("text-anchor", "end")
+        .attr("fill", "#6b7280")
+        .attr("font-size", 10)
         .text(formatCurrency(value));
     }
 
@@ -299,21 +302,23 @@ if (
       const m = year * 12;
       const x = xScale(Math.min(m, months - 1));
 
-      gridGroup.append('line')
-        .attr('x1', x)
-        .attr('x2', x)
-        .attr('y1', PADDING_TOP)
-        .attr('y2', HEIGHT - PADDING_BOTTOM)
-        .attr('stroke', 'rgba(156,163,175,0.8)')
-        .attr('stroke-width', 1)
-        .attr('stroke-dasharray', '2 3');
+      gridGroup
+        .append("line")
+        .attr("x1", x)
+        .attr("x2", x)
+        .attr("y1", PADDING_TOP)
+        .attr("y2", HEIGHT - PADDING_BOTTOM)
+        .attr("stroke", "rgba(156,163,175,0.8)")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "2 3");
 
-      gridGroup.append('text')
-        .attr('x', x)
-        .attr('y', HEIGHT - PADDING_BOTTOM + 18)
-        .attr('text-anchor', 'middle')
-        .attr('fill', '#6b7280')
-        .attr('font-size', 10)
+      gridGroup
+        .append("text")
+        .attr("x", x)
+        .attr("y", HEIGHT - PADDING_BOTTOM + 18)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#6b7280")
+        .attr("font-size", 10)
         .text(`${year}年`);
     }
 
@@ -325,14 +330,16 @@ if (
     for (let i = months - 1; i >= 0; i--) {
       band90Data.push({ x: xScale(i), y: yScale(p10[i]) });
     }
-    const band90Path = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y)
+    const band90Path = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y)
       .curve(d3.curveLinearClosed);
-    svg.append('path')
-      .attr('d', band90Path(band90Data))
-      .attr('fill', 'rgba(191, 219, 254, 0.4)')
-      .attr('stroke', 'none');
+    svg
+      .append("path")
+      .attr("d", band90Path(band90Data))
+      .attr("fill", "rgba(191, 219, 254, 0.4)")
+      .attr("stroke", "none");
 
     // Draw 30-70 percentile band (darker)
     const band70Data = [];
@@ -342,95 +349,118 @@ if (
     for (let i = months - 1; i >= 0; i--) {
       band70Data.push({ x: xScale(i), y: yScale(p30[i]) });
     }
-    const band70Path = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y)
+    const band70Path = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y)
       .curve(d3.curveLinearClosed);
-    svg.append('path')
-      .attr('d', band70Path(band70Data))
-      .attr('fill', 'rgba(191, 219, 254, 0.7)')
-      .attr('stroke', 'none');
+    svg
+      .append("path")
+      .attr("d", band70Path(band70Data))
+      .attr("fill", "rgba(191, 219, 254, 0.7)")
+      .attr("stroke", "none");
 
     // Median line
     const medianData = median.map((v, i) => ({ x: xScale(i), y: yScale(v) }));
-    const medianLine = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y);
-    svg.append('path')
-      .attr('d', medianLine(medianData))
-      .attr('fill', 'none')
-      .attr('stroke', '#1d4ed8')
-      .attr('stroke-width', 2.5);
+    const medianLine = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y);
+    svg
+      .append("path")
+      .attr("d", medianLine(medianData))
+      .attr("fill", "none")
+      .attr("stroke", "#1d4ed8")
+      .attr("stroke-width", 2.5);
 
     // Normal account median
-    const normalData = normalMedian.map((v, i) => ({ x: xScale(i), y: yScale(v) }));
-    const normalLine = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y);
-    svg.append('path')
-      .attr('d', normalLine(normalData))
-      .attr('fill', 'none')
-      .attr('stroke', '#3b82f6')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '5 3');
+    const normalData = normalMedian.map((v, i) => ({
+      x: xScale(i),
+      y: yScale(v),
+    }));
+    const normalLine = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y);
+    svg
+      .append("path")
+      .attr("d", normalLine(normalData))
+      .attr("fill", "none")
+      .attr("stroke", "#3b82f6")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "5 3");
 
     // Locked account median
-    const lockedData = lockedMedian.map((v, i) => ({ x: xScale(i), y: yScale(v) }));
-    const lockedLine = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y);
-    svg.append('path')
-      .attr('d', lockedLine(lockedData))
-      .attr('fill', 'none')
-      .attr('stroke', '#10b981')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '5 3');
+    const lockedData = lockedMedian.map((v, i) => ({
+      x: xScale(i),
+      y: yScale(v),
+    }));
+    const lockedLine = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y);
+    svg
+      .append("path")
+      .attr("d", lockedLine(lockedData))
+      .attr("fill", "none")
+      .attr("stroke", "#10b981")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "5 3");
 
     // NISA account median
     const nisaData = nisaMedian.map((v, i) => ({ x: xScale(i), y: yScale(v) }));
-    const nisaLine = d3.line<{ x: number; y: number }>()
-      .x(d => d.x)
-      .y(d => d.y);
-    svg.append('path')
-      .attr('d', nisaLine(nisaData))
-      .attr('fill', 'none')
-      .attr('stroke', '#8b5cf6')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '5 3');
+    const nisaLine = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y);
+    svg
+      .append("path")
+      .attr("d", nisaLine(nisaData))
+      .attr("fill", "none")
+      .attr("stroke", "#8b5cf6")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "5 3");
 
     if (deterministic && deterministic.length === months) {
-      const detData = deterministic.map((v, i) => ({ x: xScale(i), y: yScale(v) }));
-      const detLine = d3.line<{ x: number; y: number }>()
-        .x(d => d.x)
-        .y(d => d.y);
-      svg.append('path')
-        .attr('d', detLine(detData))
-        .attr('fill', 'none')
-        .attr('stroke', '#10b981')
-        .attr('stroke-width', 1.8)
-        .attr('stroke-dasharray', '6 3');
+      const detData = deterministic.map((v, i) => ({
+        x: xScale(i),
+        y: yScale(v),
+      }));
+      const detLine = d3
+        .line<{ x: number; y: number }>()
+        .x((d) => d.x)
+        .y((d) => d.y);
+      svg
+        .append("path")
+        .attr("d", detLine(detData))
+        .attr("fill", "none")
+        .attr("stroke", "#10b981")
+        .attr("stroke-width", 1.8)
+        .attr("stroke-dasharray", "6 3");
     }
 
     // Cursor line
-    const cursorLine = svg.append('line')
-      .attr('x1', PADDING_LEFT)
-      .attr('x2', PADDING_LEFT)
-      .attr('y1', PADDING_TOP)
-      .attr('y2', HEIGHT - PADDING_BOTTOM)
-      .attr('stroke', '#f97316')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '4 3')
-      .attr('opacity', 0);
+    const cursorLine = svg
+      .append("line")
+      .attr("x1", PADDING_LEFT)
+      .attr("x2", PADDING_LEFT)
+      .attr("y1", PADDING_TOP)
+      .attr("y2", HEIGHT - PADDING_BOTTOM)
+      .attr("stroke", "#f97316")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "4 3")
+      .attr("opacity", 0);
 
     // Cursor dot
-    const cursorDot = svg.append('circle')
-      .attr('cx', PADDING_LEFT)
-      .attr('cy', HEIGHT - PADDING_BOTTOM)
-      .attr('r', 4)
-      .attr('fill', '#ef4444')
-      .attr('stroke', '#ffffff')
-      .attr('stroke-width', 1.5)
-      .attr('opacity', 0);
+    const cursorDot = svg
+      .append("circle")
+      .attr("cx", PADDING_LEFT)
+      .attr("cy", HEIGHT - PADDING_BOTTOM)
+      .attr("r", 4)
+      .attr("fill", "#ef4444")
+      .attr("stroke", "#ffffff")
+      .attr("stroke-width", 1.5)
+      .attr("opacity", 0);
 
     chartState.cursorLine = cursorLine.node() as SVGLineElement;
     chartState.cursorDot = cursorDot.node() as SVGCircleElement;
@@ -590,12 +620,13 @@ if (
     const PAD_B = 40;
 
     // Background
-    svg.append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', WIDTH_H)
-      .attr('height', HEIGHT_H)
-      .attr('fill', '#ffffff');
+    svg
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", WIDTH_H)
+      .attr("height", HEIGHT_H)
+      .attr("fill", "#ffffff");
 
     if (!buckets.length) {
       return;
@@ -609,13 +640,14 @@ if (
     const maxCount = Math.max(...buckets.map((b) => b.count));
 
     // X-axis
-    svg.append('line')
-      .attr('x1', PAD_L)
-      .attr('x2', WIDTH_H - PAD_R)
-      .attr('y1', HEIGHT_H - PAD_B)
-      .attr('y2', HEIGHT_H - PAD_B)
-      .attr('stroke', '#d1d5db')
-      .attr('stroke-width', 1);
+    svg
+      .append("line")
+      .attr("x1", PAD_L)
+      .attr("x2", WIDTH_H - PAD_R)
+      .attr("y1", HEIGHT_H - PAD_B)
+      .attr("y2", HEIGHT_H - PAD_B)
+      .attr("stroke", "#d1d5db")
+      .attr("stroke-width", 1);
 
     const barWidth = innerWidth / buckets.length;
 
@@ -625,32 +657,35 @@ if (
       const x = PAD_L + barWidth * i;
       const y = HEIGHT_H - PAD_B - barHeight;
 
-      svg.append('rect')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('width', Math.max(barWidth - 2, 1))
-        .attr('height', barHeight)
-        .attr('fill', '#bfdbfe');
+      svg
+        .append("rect")
+        .attr("x", x)
+        .attr("y", y)
+        .attr("width", Math.max(barWidth - 2, 1))
+        .attr("height", barHeight)
+        .attr("fill", "#bfdbfe");
     });
 
     const min = buckets[0].start;
     const max = buckets[buckets.length - 1].end;
 
     // Labels
-    svg.append('text')
-      .attr('x', PAD_L)
-      .attr('y', HEIGHT_H - PAD_B + 24)
-      .attr('text-anchor', 'start')
-      .attr('fill', '#6b7280')
-      .attr('font-size', 10)
+    svg
+      .append("text")
+      .attr("x", PAD_L)
+      .attr("y", HEIGHT_H - PAD_B + 24)
+      .attr("text-anchor", "start")
+      .attr("fill", "#6b7280")
+      .attr("font-size", 10)
       .text(formatCurrency(min));
 
-    svg.append('text')
-      .attr('x', WIDTH_H - PAD_R)
-      .attr('y', HEIGHT_H - PAD_B + 24)
-      .attr('text-anchor', 'end')
-      .attr('fill', '#6b7280')
-      .attr('font-size', 10)
+    svg
+      .append("text")
+      .attr("x", WIDTH_H - PAD_R)
+      .attr("y", HEIGHT_H - PAD_B + 24)
+      .attr("text-anchor", "end")
+      .attr("fill", "#6b7280")
+      .attr("font-size", 10)
       .text(formatCurrency(max));
   }
 
